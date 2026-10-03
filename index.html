@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Happy Birthday 🎂</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0f1028;
+        color: white;
+        overflow-x: hidden;
+      }
+
+      /* =========================
+           INTRO SCREEN
+        ========================== */
+
+      #intro {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: radial-gradient(circle at top, #3d1b61, #0f1028 65%);
+
+        transition:
+          opacity 1s ease,
+          visibility 1s ease;
+      }
+
+      #intro.hide {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .intro-content {
+        text-align: center;
+        padding: 25px;
+        animation: introFloat 3s ease-in-out infinite;
+      }
+
+      .gift {
+        font-size: 90px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        animation: giftShake 1.5s infinite;
+      }
+
+      .intro-content h1 {
+        font-size: clamp(28px, 6vw, 55px);
+        margin-bottom: 15px;
+      }
+
+      .intro-content p {
+        font-size: 18px;
+        opacity: 0.8;
+        margin-bottom: 30px;
+      }
+
+      .open-btn {
+        border: none;
+        padding: 15px 35px;
+        border-radius: 50px;
+
+        background: linear-gradient(135deg, #ff4d8d, #ff8a5b);
+        color: white;
+
+        font-size: 18px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        box-shadow: 0 10px 30px rgba(255, 77, 141, 0.4);
+
+        transition: 0.3s;
+      }
+
+      .open-btn:hover {
+        transform: scale(1.08);
+      }
+
+      /* =========================
+           MAIN WEBSITE
+        ========================== */
+
+      #main {
+        min-height: 100vh;
+
+        background:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 0, 128, 0.15),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 80% 10%,
+            rgba(120, 80, 255, 0.15),
+            transparent 30%
+          ),
+          #0f1028;
+      }
+
+      /* =========================
+           HERO
+        ========================== */
+
+      .hero {
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+
+        position: relative;
+        overflow: hidden;
+
+        padding: 30px;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+
+      .small-text {
+        font-size: 20px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #ff9fc4;
+
+        animation: fadeUp 1s ease forwards;
+      }
+
+      .hero h1 {
+        font-size: clamp(50px, 10vw, 110px);
+        line-height: 1;
+
+        margin: 20px 0;
+
+        background: linear-gradient(90deg, #ff70a6, #ffd166, #ffffff, #ff70a6);
+
+        background-size: 300%;
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+
+        animation:
+          gradientMove 5s linear infinite,
+          titlePop 1s ease;
+      }
+
+      .hero h2 {
+        font-size: clamp(25px, 5vw, 50px);
+        color: #fff;
+        margin-bottom: 25px;
+      }
+
+      .hero-message {
+        max-width: 700px;
+        margin: auto;
+
+        font-size: 19px;
+        line-height: 1.8;
+
+        color: #ddd;
+      }
+
+      .scroll-btn {
+        display: inline-block;
+
+        margin-top: 40px;
+
+        padding: 13px 25px;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 30px;
+
+        color: white;
+        text-decoration: none;
+
+        transition: 0.3s;
+      }
+
+      .scroll-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+      }
+
+      /* =========================
+           SECTIONS
+        ========================== */
+
+      section {
+        padding: 100px 20px;
+        position: relative;
+      }
+
+      .section-container {
+        max-width: 1100px;
+        margin: auto;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: clamp(35px, 6vw, 55px);
+        margin-bottom: 20px;
+      }
+
+      .section-subtitle {
+        color: #aaa;
+        font-size: 18px;
+        margin-bottom: 50px;
+      }
+
+      /* =========================
+           MESSAGE CARD
+        ========================== */
+
+      .message-card {
+        max-width: 800px;
+        margin: auto;
+
+        padding: 45px;
+
+        border-radius: 30px;
+
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+
+        backdrop-filter: blur(15px);
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+        line-height: 2;
+
+        font-size: 19px;
+        color: #eee;
+      }
+
+      .message-card .heart {
+        font-size: 45px;
+        margin-bottom: 20px;
+      }
+
+      /* =========================
+           PHOTO GALLERY
+        ========================== */
+
+      .gallery {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+        gap: 25px;
+      }
+
+      .photo {
+        height: 300px;
+
+        border-radius: 25px;
+
+        overflow: hidden;
+
+        background: linear-gradient(135deg, #ff5f9e, #7657ff);
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+
+        transition: 0.4s;
+      }
+
+      .photo:hover {
+        transform: translateY(-10px) rotate(1deg);
+      }
+
+      .photo img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        transition: 0.5s;
+      }
+
+      .photo:hover img {
+        transform: scale(1.08);
+      }
+
+      /* =========================
+           REASONS / MEMORIES
+        ========================== */
+
+      .cards {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+        gap: 25px;
+      }
+
+      .card {
+        padding: 35px 25px;
+
+        border-radius: 25px;
+
+        background: rgba(255, 255, 255, 0.06);
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        transition: 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .card-icon {
+        font-size: 45px;
+        margin-bottom: 20px;
+      }
+
+      .card h3 {
+        font-size: 23px;
+        margin-bottom: 12px;
+      }
+
+      .card p {
+        color: #bbb;
+        line-height: 1.7;
+      }
+
+      /* =========================
+           FINAL SECTION
+        ========================== */
+
+      .final-section {
+        min-height: 80vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+      }
+
+      .final-content h2 {
+        font-size: clamp(40px, 8vw, 80px);
+
+        margin-bottom: 30px;
+      }
+
+      .final-content p {
+        font-size: 22px;
+        color: #ccc;
+
+        max-width: 700px;
+        line-height: 1.8;
+        margin: auto;
+      }
+
+      .from {
+        margin-top: 35px;
+
+        font-size: 20px;
+
+        color: #ff8fb8;
+      }
+
+      /* =========================
+           BALLOONS
+        ========================== */
+
+      .balloon {
+        position: absolute;
+
+        bottom: -150px;
+
+        width: 55px;
+        height: 70px;
+
+        border-radius: 50%;
+
+        opacity: 0.8;
+
+        animation: balloonUp linear infinite;
+      }
+
+      .balloon::after {
+        content: "";
+
+        position: absolute;
+
+        width: 1px;
+        height: 120px;
+
+        background: rgba(255, 255, 255, 0.4);
+
+        left: 50%;
+        top: 70px;
+      }
+
+      .balloon:nth-child(1) {
+        left: 5%;
+        background: #ff5f8f;
+        animation-duration: 10s;
+      }
+
+      .balloon:nth-child(2) {
+        left: 20%;
+        background: #ffd166;
+        animation-duration: 14s;
+        animation-delay: 2s;
+      }
+
+      .balloon:nth-child(3) {
+        left: 75%;
+        background: #7c6cff;
+        animation-duration: 12s;
+        animation-delay: 1s;
+      }
+
+      .balloon:nth-child(4) {
+        left: 90%;
+        background: #5de2e7;
+        animation-duration: 15s;
+        animation-delay: 3s;
+      }
+
+      /* =========================
+           FLOATING HEARTS
+        ========================== */
+
+      .heart-float {
+        position: fixed;
+
+        bottom: -50px;
+
+        font-size: 25px;
+
+        pointer-events: none;
+
+        animation: heartFloat 6s linear forwards;
+
+        z-index: 50;
+      }
+
+      /* =========================
+           FOOTER
+        ========================== */
+
+      footer {
+        padding: 30px;
+
+        text-align: center;
+
+        color: #777;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      /* =========================
+           ANIMATIONS
+        ========================== */
+
+      @keyframes introFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes giftShake {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+
+        25% {
+          transform: rotate(-8deg);
+        }
+
+        75% {
+          transform: rotate(8deg);
+        }
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0%;
+        }
+
+        100% {
+          background-position: 300%;
+        }
+      }
+
+      @keyframes titlePop {
+        from {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes balloonUp {
+        from {
+          transform: translateY(0) rotate(0deg);
+        }
+
+        to {
+          transform: translateY(-120vh) rotate(20deg);
+        }
+      }
+
+      @keyframes heartFloat {
+        from {
+          transform: translateY(0) translateX(0) rotate(0deg);
+
+          opacity: 1;
+        }
+
+        to {
+          transform: translateY(-110vh) translateX(100px) rotate(360deg);
+
+          opacity: 0;
+        }
+      }
+
+      /* =========================
+           MOBILE
+        ========================== */
+
+      @media (max-width: 600px) {
+        .hero {
+          min-height: 100svh;
+        }
+
+        .message-card {
+          padding: 30px 20px;
+          font-size: 17px;
+        }
+
+        section {
+          padding: 70px 18px;
+        }
+
+        .photo {
+          height: 280px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ==================================================
+     INTRO SCREEN
+================================================== -->
+
+    <div id="intro">
+      <div class="intro-content">
+        <div class="gift">🎁</div>
+
+        <h1>Someone has a surprise for you...</h1>
+
+        <p>Tap the button to open your birthday surprise ❤️</p>
+
+        <button class="open-btn" onclick="openBirthday()">
+          Open Your Surprise 🎉
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================================================
+     MAIN WEBSITE
+================================================== -->
+
+    <main id="main">
+      <!-- HERO -->
+
+      <section class="hero">
+        <!-- Balloons -->
+
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+
+        <div class="hero-content">
+          <div class="small-text">Today is a very special day ✨</div>
+
+          <!-- CHANGE NAME HERE -->
+
+          <h1>Happy Birthday!</h1>
+
+          <h2>My Amazing Friend ❤️</h2>
+
+          <p class="hero-message">
+            Today isn't just another day. It's the day someone truly special
+            came into this world. So this little website is just for you.
+          </p>
+
+          <a href="#message" class="scroll-btn"> Your Birthday Message ↓ </a>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         MESSAGE
+    ================================================== -->
+
+      <section id="message">
+        <div class="section-container">
+          <h2 class="section-title">A Message For You 💌</h2>
+
+          <p class="section-subtitle">Some words from the heart...</p>
+
+          <div class="message-card">
+            <div class="heart">❤️</div>
+
+            <p>
+              Happy Birthday to one of the most wonderful people in my life!
+            </p>
+
+            <br />
+
+            <p>
+              I hope your special day is filled with happiness, laughter,
+              beautiful memories and all the things that make you smile.
+            </p>
+
+            <br />
+
+            <p>
+              Thank you for being such an amazing friend. Life is definitely
+              more fun with you around.
+            </p>
+
+            <br />
+
+            <p>
+              May this new year of your life bring you closer to your dreams and
+              give you countless reasons to smile.
+            </p>
+
+            <br />
+
+            <p>
+              Keep smiling, keep shining and never stop being the amazing person
+              you are. ❤️
+            </p>
+
+            <br />
+
+            <strong> Once again, HAPPY BIRTHDAY! 🎂🎉 </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         PHOTOS
+    ================================================== -->
+
+      <section>
+        <div class="section-container">
+          <h2 class="section-title">Beautiful Memories 📸</h2>
+
+          <p class="section-subtitle">
+            Replace these photos with your favorite memories.
+          </p>
+
+          <div class="gallery">
+            <!--
+                    Replace photo1.jpg etc.
+                    with your own images.
+                -->
+
+            <div class="photo">
+              <img src="photo1.jpg" alt="Memory 1" />
+            </div>
+
+            <div class="photo">
+              <img src="photo2.jpg" alt="Memory 2" />
+            </div>
+
+            <div class="photo">
+              <img src="photo3.jpg" alt="Memory 3" />
+            </div>
+
+            <div class="photo">
+              <img src="photo4.jpg" alt="Memory 4" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         FRIENDSHIP CARDS
+    ================================================== -->
+
+      <section>
+        <div class="section-container">
+          <h2 class="section-title">Why You're Special ❤️</h2>
+
+          <p class="section-subtitle">
+            Just a few things that make you amazing.
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <div class="card-icon">😊</div>
+
+              <h3>Your Smile</h3>
+
+              <p>
+                Your smile has a way of making even an ordinary day feel
+                special.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">🤝</div>
+
+              <h3>Your Friendship</h3>
+
+              <p>
+                Having a friend like you makes life's journey a lot more
+                beautiful.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">✨</div>
+
+              <h3>Your Personality</h3>
+
+              <p>Never change the wonderful person you are.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-icon">🌟</div>
+
+              <h3>Your Dreams</h3>
+
+              <p>I hope you achieve every dream you've been working towards.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+         FINAL MESSAGE
+    ================================================== -->
+
+      <section class="final-section">
+        <div class="final-content">
+          <h2>Keep Shining ✨</h2>
+
+          <p>
+            May your life always be filled with happiness, love, success,
+            laughter and unforgettable memories.
+          </p>
+
+          <div class="from">Made with ❤️ especially for you</div>
+        </div>
+      </section>
+
+      <footer>Happy Birthday 🎂 | Made with ❤️</footer>
+    </main>
+
+    <!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+    <script>
+      /*
+        OPEN BIRTHDAY WEBSITE
+    */
+
+      function openBirthday() {
+        const intro = document.getElementById("intro");
+
+        intro.classList.add("hide");
+
+        startConfetti();
+
+        startHearts();
+
+        /*
+            Try to play music if you add music.mp3
+        */
+
+        const music = document.getElementById("birthdayMusic");
+
+        if (music) {
+          music.play().catch(() => {});
+        }
+      }
+
+      /*
+        CREATE CONFETTI
+    */
+
+      function startConfetti() {
+        const colors = ["#ff4d8d", "#ffd166", "#7c6cff", "#5de2e7", "#ffffff"];
+
+        for (let i = 0; i < 150; i++) {
+          const confetti = document.createElement("div");
+
+          confetti.style.position = "fixed";
+
+          confetti.style.width = Math.random() * 8 + 5 + "px";
+
+          confetti.style.height = Math.random() * 8 + 5 + "px";
+
+          confetti.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+
+          confetti.style.left = Math.random() * 100 + "vw";
+
+          confetti.style.top = "-20px";
+
+          confetti.style.zIndex = "999";
+
+          confetti.style.borderRadius = Math.random() > 0.5 ? "50%" : "0";
+
+          const duration = Math.random() * 3 + 3;
+
+          confetti.animate(
+            [
+              {
+                transform: "translateY(0) rotate(0deg)",
+                opacity: 1,
+              },
+
+              {
+                transform: `translateY(110vh) rotate(${Math.random() * 720}deg)`,
+                opacity: 0.8,
+              },
+            ],
+
+            {
+              duration: duration * 1000,
+              easing: "linear",
+            },
+          );
+
+          document.body.appendChild(confetti);
+
+          setTimeout(() => {
+            confetti.remove();
+          }, duration * 1000);
+        }
+      }
+
+      /*
+        FLOATING HEARTS
+    */
+
+      function startHearts() {
+        setInterval(() => {
+          const heart = document.createElement("div");
+
+          heart.className = "heart-float";
+
+          const hearts = ["❤️", "💖", "💕", "💗", "💓", "💞"];
+
+          heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+          heart.style.left = Math.random() * 100 + "vw";
+
+          heart.style.fontSize = Math.random() * 20 + 20 + "px";
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 6000);
+        }, 900);
+      }
+    </script>
+
+    <!--
+==========================================================
+OPTIONAL MUSIC
+
+To use music:
+
+1. Put an MP3 file in the same folder.
+2. Name it "music.mp3".
+3. Remove the comments around this audio element.
+
+Example:
+
+<audio id="birthdayMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+==========================================================
+-->
+  </body>
+</html>
