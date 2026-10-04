@@ -900,8 +900,16 @@
           }, 6000);
         }, 900);
       }
+      const music = document.getElementById("birthdayMusic");
+
+      if (music) {
+        music.play().catch(() => {});
+      }
     </script>
 
+    <audio id="birthdayMusic" loop>
+      <source src="Pooparikka-Neeyum.mp3" type="audio/mpeg" />
+    </audio>
     <!--
 ==========================================================
 OPTIONAL MUSIC
